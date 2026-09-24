@@ -1,0 +1,35 @@
+:root {
+  --bg: #0f1115; --panel: #161a21; --border: #2a303b; --text: #d7dce4; --muted: #8b94a3;
+  --green: #4ade80; --red: #f87171; --amber: #fbbf24; --blue: #60a5fa;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: system-ui, sans-serif; }
+main { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { font-size: 1.4rem; margin: 0 0 4px; }
+.sub { color: var(--muted); margin: 0 0 20px; font-size: .92rem; }
+.tabs { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.tab { border: 1px solid var(--border); background: var(--panel); color: var(--text);
+  padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: .9rem; }
+.tab.active.secure { border-color: var(--green); color: var(--green); }
+.tab.active.vuln { border-color: var(--red); color: var(--red); }
+.banner { padding: 10px 14px; border-radius: 8px; font-size: .85rem; margin-bottom: 12px; line-height: 1.45; }
+.banner.secure { background: #12261a; border: 1px solid #1f5130; }
+.banner.vuln { background: #2a1414; border: 1px solid #6b2525; }
+.term { background: #0a0c10; border: 1px solid var(--border); border-radius: 10px;
+  font-family: var(--mono); font-size: 13.5px; height: 440px; overflow-y: auto; padding: 14px; }
+.line { white-space: pre-wrap; word-break: break-word; margin: 0 0 2px; }
+.prompt { color: var(--blue); }
+.err { color: var(--red); }
+.blocked { color: var(--amber); }
+.meta { color: var(--muted); font-size: 12px; }
+.inputrow { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.inputrow input { flex: 1; background: transparent; border: none; outline: none; color: var(--text);
+  font-family: var(--mono); font-size: 13.5px; }
+.payloads { margin-top: 16px; }
+.payloads h2 { font-size: .95rem; margin: 0 0 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--mono); font-size: 12px; background: var(--panel); border: 1px solid var(--border);
+  color: var(--text); padding: 5px 9px; border-radius: 6px; cursor: pointer; }
+.chip.attack { border-color: #5a2a2a; }
+.chip:hover { border-color: var(--blue); }
