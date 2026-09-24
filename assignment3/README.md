@@ -1,16 +1,5 @@
 # Assignment: Web-Based Command-Line Interface with Command Injection Safeguards
 
-| | |
-|---|---|
-| **Student name** | Chimi Gyeltshen |
-| **Student ID** | 02230279 |
-| **College** | College of Science and Technology, Royal University of Bhutan |
-| **Module** | _[Module code and name]_ |
-| **Tutor** | _[Tutor name]_ |
-| **Submission date** | _[Date]_ |
-
----
-
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
