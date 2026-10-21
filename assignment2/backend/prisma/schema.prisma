@@ -1,0 +1,53 @@
+// Prisma 7 schema. The connection URL lives in prisma.config.ts, not here.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  username     String   @unique @db.VarChar(50)
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+  files        File[]
+
+  @@map("users")
+}
+
+model File {
+  id           String   @id @default(uuid()) @db.Uuid
+  ownerId      String   @map("owner_id") @db.Uuid
+  owner        User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  // Sanitised original name. Display only, never used as a storage path.
+  originalName String   @map("original_name") @db.VarChar(120)
+  // Server-generated path inside the bucket: <ownerId>/<uuid>.<ext>
+  storageKey   String   @unique @map("storage_key")
+  mimeType     String   @map("mime_type") @db.VarChar(50)
+  sizeBytes    Int      @map("size_bytes")
+  sha256       String   @db.Char(64)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@index([ownerId])
+  @@map("files")
+}
+
+// Append-only log of every upload attempt (accepted or rejected).
+model UploadAudit {
+  id         BigInt   @id @default(autoincrement())
+  userId     String?  @map("user_id") @db.Uuid
+  fileName   String   @map("file_name") @db.VarChar(255)
+  sizeBytes  Int      @map("size_bytes")
+  sha256     String?  @db.Char(64)
+  outcome    String   @db.VarChar(10) // ACCEPTED | REJECTED
+  reason     String?
+  ip         String?  @db.VarChar(64)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@index([userId, createdAt])
+  @@map("upload_audit")
+}
